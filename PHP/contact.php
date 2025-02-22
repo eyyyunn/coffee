@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../CSS/contact.css">
+  <link rel="stylesheet" href="../CSS/contact.css?v=<?php echo time(); ?>">
+
   <title>Contact Us</title>
 </head>
 <body>
   <header>
     <nav>
-      <img class="logo" src="logo-removebg-preview (3).png" alt="">
+    <img class="logo" src="../MEDIA/logo.png" alt="">
     <label for="sidebar-toggle">
       <span class="menu_icon">
         <svg viewBox="0 0 18 15" width="18px" height="15px">
@@ -73,7 +74,7 @@
 			
 		</div>
 		<div class="bottom-bar">
-			&copy; 2024 Black Fox. All rights reserved.
+			&copy; 2024 Dianne's Coffee Shop. All rights reserved.
 		</div>
 	</footer>
   

@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="My Vlog - A personal video blog about my travels, experiences, and daily life.">
-		<link rel="stylesheet" href="../CSS/home.css">
+		<link rel="stylesheet" href="../CSS/home.css?v=<?php echo time(); ?>">
 		<title>Home
 		</title>
 
@@ -12,7 +12,7 @@
 <body>
 		<header>
 			<nav>
-				<img class="logo" src="logo-removebg-preview (3).png" alt="">
+				<img class="logo" src="../MEDIA/logo.png" alt="">
 			<label for="sidebar-toggle">
 				<span class="menu_icon">
 					<svg viewBox="0 0 18 15" width="18px" height="15px">
@@ -47,7 +47,7 @@
 	<main>
 		<div class="home-info">
 		<div class="info">
-			<h2>WELCOME TO BLACK FOX COFFEE</h2>
+			<h2>WELCOME TO Dianne's Coffee Shop</h2>
 			<h2 class="carry"><br>Carry-out or dine in is available every day from 8AM-4PM. <br>While you can always stop by and order with us at the counter, <br>we also offer online ordering and contact-free pick up through our <a href="#" target="_blank" rel="noreferrer noopener">
 				<mark class="has-inline-color has-pale-pink-color">website</mark>.</a>
 				
@@ -86,7 +86,7 @@
 			
 		</div>
 		<div class="bottom-bar">
-			&copy; 2024 Black Fox. All rights reserved.
+			&copy; 2024 Dianne's Coffee Shop. All rights reserved.
 		</div>
 	</footer>
 

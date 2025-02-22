@@ -1,54 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="My Vlog - A personal video blog about my travels, experiences, and daily life.">
-		<link rel="stylesheet" href="../CSS/vlog.css">
-		<title>My Vlog</title>
-		<style>
-			
-		.scroll-container {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Vlog - A personal video blog about my travels, experiences, and daily life.">
+    <link rel="stylesheet" href="../CSS/vlog.css?v=<?php echo time(); ?>">
+    <title>My Vlog</title>
+    <style>
+        .scroll-container-wrapper {
+            position: relative;
+        }
+        .scroll-container {
             display: flex;
-            overflow-x: auto; /* Enables horizontal scrolling */
-            gap: 20px; /* Adds space between items */
+            overflow-x: auto;
+            gap: 20px;
             padding: 10px;
-            white-space: nowrap; /* Prevents wrapping */
-            scroll-snap-type: x mandatory; /* Smooth snapping */
+            white-space: nowrap;
+            scroll-snap-type: x mandatory;
             border: 1px solid #ccc;
         }
-
         .scroll-container::-webkit-scrollbar {
             height: 8px;
         }
-
         .scroll-container::-webkit-scrollbar-thumb {
             background: #888;
             border-radius: 4px;
         }
-
         .scroll-item {
-            flex: 0 0 auto; /* Prevents shrinking */
-            width: 200px; /* Set a fixed width */
+            flex: 0 0 auto;
+            width: 200px;
             text-align: center;
             scroll-snap-align: start;
             background: #f8f8f8;
             padding: 10px;
             border-radius: 10px;
         }
-
         .scroll-item img {
-            width: 100%; /* Make image fill the div */
+            width: 100%;
             height: 150px;
             object-fit: cover;
             border-radius: 8px;
         }
-
-		</style>
-
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .scroll-button.left {
+            left: 0;
+        }
+        .scroll-button.right {
+            right: 0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .close {
+            cursor: pointer;
+            color: red;
+        }
+    </style>
 </head>
 <body>
-		<header>
+<header>
 			<nav>
 				<img class="logo" src="../MEDIA/logo.png" alt="">
 			<label for="sidebar-toggle">
@@ -80,213 +117,178 @@
 	</nav>
 		</header>
 
-		<section id="home" class="remove">
-				<h1 style="color: black;">Dianne's Coffee Shop</h1>
-				
-			
-		</section>
-
-		
-
-		<section id="videos">
-			<h2>Coffees</h2>
-				<div class="cof_cont">
-					<div class="product">
-						
-						
-						<img src="../MEDIA/feat_cof.webp" alt="" srcset="" class="feat">
-						<div class="cof_dec">
-							<h2 style="color: white;">Stone Street</h2>
-							<p>Price: $99.99</p>
-							<button id="buyButton">Buy Now</button>
-						</div>
-						<br>
-					</div>
-					
-					
-					<div class="product">
-					
-						
-						<img src="../MEDIA/feat_cof.webp" alt="" srcset="" class="feat">
-						<div class="cof_dec">
-							<h2 style="color: white;">Stone Street</h2>
-							<p>Price: $99.99</p>
-							<button id="buyButton">Buy Now</button>
-						</div>
-						<br>
-					</div>
-					<br>
-
-					<div class="product">
-					
-						
-						<img src="../MEDIA/feat_cof.webp" alt="" srcset="" class="feat">
-						<div class="cof_dec">
-							<h2 style="color: white;">Stone Street</h2>
-							<p>Price: $99.99</p>
-							<button id="buyButton">Buy Now</button>
-						</div>
-						<br>
-					</div>
-					<br>
-					<div class="product">
-					
-						
-						<img src="../MEDIA/feat_cof.webp" alt="" srcset="" class="feat">
-						<div class="cof_dec">
-							<h2 style="color: white;">Stone Street</h2>
-							<p>Price: $99.99</p>
-							<button id="buyButton">Buy Now</button>
-						</div>
-						<br>
-					</div>
-					<br>
-					<div class="product">
-					
-						
-						<img src="../MEDIA/feat_cof.webp" alt="" srcset="" class="feat">
-						<div class="cof_dec">
-							<h2 style="color: white;">Stone Street</h2>
-							<p>Price: $99.99</p>
-							<button id="buyButton">Buy Now</button>
-						</div>
-						<br>
-					</div>
-					<br>
-
-				</div>
-
-<div class="scroll-container">
-        <div class="scroll-item">
-            <img src="../MEDIA/feat_cof.webp" alt="Apple">
-            <p>cof</p>
-			<p>Price: $99.99</p>
-			<button id="buyButton">Buy Now</button>
+    <section id="home" class="remove">
+        <h1 style="color: black;">Dianne's Coffee Shop</h1>
+    </section>
+    <section id="videos">
+        <h2>Coffees</h2>
+        <div class="scroll-container-wrapper">
+            <button class="scroll-button left">&#9664;</button>
+            <div class="scroll-container">
+                <div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Apple">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+                <div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Banana">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+                <div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Grapes">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+                <div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Orange">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+                <div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Strawberry">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+				<div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Orange">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+                <div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Strawberry">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+				<div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Orange">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+                <div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Strawberry">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+				<div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Orange">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+                <div class="scroll-item">
+                    <img src="../MEDIA/feat_cof.webp" alt="Strawberry">
+                    <p>cof</p>
+                    <p>Price: $99.99</p>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+            </div>
+            <button class="scroll-button right">&#9654;</button>
         </div>
-        <div class="scroll-item">
-            <img src="../MEDIA/feat_cof.webp" alt="Banana">
-            <p>cof</p>
-			<p>Price: $99.99</p>
-			<button id="buyButton">Buy Now</button>
-        </div>
-        <div class="scroll-item">
-            <img src="../MEDIA/feat_cof.webp" alt="Grapes">
-            <p>cof</p>
-			<p>Price: $99.99</p>
-			<button id="buyButton">Buy Now</button>
-        </div>
-        <div class="scroll-item">
-            <img src="../MEDIA/feat_cof.webp" alt="Orange">
-            <p>cof</p>
-			<p>Price: $99.99</p>
-			<button id="buyButton">Buy Now</button>
-        </div>
-        <div class="scroll-item">
-            <img src="../MEDIA/feat_cof.webp" alt="Strawberry">
-            <p>cof</p>
-			<p>Price: $99.99</p>
-			<button id="buyButton">Buy Now</button>
-        </div>
+    </section>
+    
+    <div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2 id="formTitle">Login</h2>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <p>Don't have an account? <a href="#" id="showRegister">Sign up</a></p>
+        </form>
+
+        <!-- Registration Form (Hidden Initially) -->
+        <form id="registerForm" style="display: none;">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+            <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+        </form>
     </div>
+</div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loginModal = document.getElementById('loginModal');
+    const closeModal = document.getElementById('closeModal');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const formTitle = document.getElementById('formTitle');
 
+    const showRegister = document.getElementById('showRegister');
+    const showLogin = document.getElementById('showLogin');
 
-				
+    let isLoggedIn = false;
 
-				<div id="loginModal" class="modal">
-							<div class="modal-content">
-								<span id="closeModal" class="close">&times;</span>
-								<h2>Please log in to proceed with the purchase</h2>
-								<form id="loginForm">
-									<label for="email">Email:</label>
-									<input type="email" id="email" name="email" required><br>
-									<label for="password">Password:</label>
-									<input type="password" id="password" name="password" required>
-									<button type="submit" class="login">Login</button>
-										<div class="dont">	
-											<p class="d_col">Don't have an account?</p>
-											<a href="Reg.php" class="reg">Register</a>
-										</div>
-								</form>
-							</div>
-						</div>
-				
+    // Show login modal on Buy button click if not logged in
+    document.querySelectorAll('.buyButton').forEach(button => {
+        button.addEventListener('click', function() {
+            if (!isLoggedIn) {
+                loginModal.style.display = 'flex';
+            } else {
+                alert('Proceeding to checkout...');
+            }
+        });
+    });
 
-				
+    closeModal.addEventListener('click', function() {
+        loginModal.style.display = 'none';
+    });
 
-		</section>
-		
+    window.addEventListener('click', function(event) {
+        if (event.target === loginModal) {
+            loginModal.style.display = 'none';
+        }
+    });
 
-		
+    // Handle Login
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        isLoggedIn = true;
+        loginModal.style.display = 'none';
+        alert('Logged in successfully! Proceeding to checkout...');
+    });
 
-		<footer class="footer">
-			<div class="container">
-				
-				
-				<div class="column">
-					<h3>Contact Us</h3>
-					<ul>
-						<li>Daro, Dumaguete City</li>
-					</ul>
-				</div>
-				
-			</div>
-			<div class="bottom-bar">
-				&copy; 2024 Black Fox. All rights reserved.
-			</div>
-		</footer>
+    // Handle Registration
+    registerForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        alert('Registered successfully! You can now log in.');
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+        formTitle.textContent = 'Login';
+    });
 
-		
+    // Toggle to Registration Form
+    showRegister.addEventListener('click', function(event) {
+        event.preventDefault();
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        formTitle.textContent = 'Register';
+    });
 
+    // Toggle to Login Form
+    showLogin.addEventListener('click', function(event) {
+        event.preventDefault();
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+        formTitle.textContent = 'Login';
+    });
+});
+</script>
 
-
-		<script >
-			// script.js
-			document.addEventListener('DOMContentLoaded', function() {
-				// Get elements
-				const buyButton = document.getElementById('buyButton');
-				const loginModal = document.getElementById('loginModal');
-				const closeModal = document.getElementById('closeModal');
-				const loginForm = document.getElementById('loginForm');
-				
-				// Simulate user login state (for demonstration)
-				let isLoggedIn = false;  // Set to true if the user is logged in
-			
-				// Show modal when "Buy Now" is clicked
-				buyButton.addEventListener('click', function() {
-					if (!isLoggedIn) {
-						loginModal.style.display = 'block';  // Show modal if not logged in
-					} else {
-						// Proceed to checkout or other steps for logged-in users
-						alert('Proceeding to checkout...');
-					}
-				});
-			
-				// Close the modal when the "x" is clicked
-				closeModal.addEventListener('click', function() {
-					loginModal.style.display = 'none';
-				});
-			
-				// Close the modal if the user clicks outside of the modal content
-				window.addEventListener('click', function(event) {
-					if (event.target === loginModal) {
-						loginModal.style.display = 'none';
-					}
-				});
-			
-				// Handle login form submission
-				loginForm.addEventListener('submit', function(event) {
-					event.preventDefault();  // Prevent the form from submitting the traditional way
-					// Assume login is successful for demonstration
-					isLoggedIn = true;
-					loginModal.style.display = 'none';  // Hide the modal
-					alert('Logged in successfully! Proceeding to checkout...');
-					// Redirect to checkout or update the page state as necessary
-				});
-			});
-		</script>
-	
-
-		
 </body>
 </html>
